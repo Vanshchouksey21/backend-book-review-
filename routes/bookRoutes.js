@@ -6,16 +6,13 @@ const multer = require('multer');
 const path = require('path');
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
+    destination: (req, file, cb) => cb(null, 'uploads/'),
+    filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
 });
 const upload = multer({ storage });
 
 router.post('/', authMiddleware, upload.single('image'), bookController.addBook);
 router.get('/', bookController.getBooks);
+router.get('/:id', bookController.getBookById);
 
 module.exports = router;

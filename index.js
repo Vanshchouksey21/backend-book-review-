@@ -18,6 +18,5 @@ app.use('/api', require('./routes/authRoutes'));
 app.use('/api/books', require('./routes/bookRoutes'));
 app.use('/api/reviews', require('./routes/reviewRoutes'));
 
-// Start
 const PORT = 5000;
-app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running at ${PORT}`));

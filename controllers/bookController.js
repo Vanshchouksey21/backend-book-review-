@@ -8,10 +8,16 @@ exports.addBook = async (req, res) => {
 };
 
 exports.getBooks = async (req, res) => {
-    const { genre, author } = req.query;
-    const filter = {};
-    if (genre) filter.genre = genre;
-    if (author) filter.author = author;
-    const books = await Book.find(filter);
+    const books = await Book.find();
     res.json(books);
+};
+
+exports.getBookById = async (req, res) => {
+    try {
+        const book = await Book.findById(req.params.id);
+        if (!book) return res.status(404).json({ error: 'Book not found' });
+        res.json(book);
+    } catch {
+        res.status(500).json({ error: 'Error fetching book' });
+    }
 };

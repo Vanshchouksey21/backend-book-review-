@@ -13,7 +13,7 @@ exports.addReview = async (req, res) => {
 
 exports.getReviews = async (req, res) => {
     const reviews = await Review.find({ bookId: req.params.bookId });
-    const avgRating = reviews.length > 0
+    const avgRating = reviews.length
         ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(2)
         : 0;
     res.json({ reviews, avgRating });
